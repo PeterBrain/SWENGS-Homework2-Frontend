@@ -1,0 +1,58 @@
+<form [formGroup]="employeeFormGroup" class="employee-form">
+    <mat-form-field>
+        <input matInput type="text" placeholder="First name" formControlName="first_name" required>
+        <mat-hint align="end">The first name of the employee</mat-hint>
+        <mat-error *ngIf="employeeFormGroup.controls.first_name.hasError('required')">First name is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="text" placeholder="Last name" formControlName="last_name" required>
+        <mat-hint align="end">The last name of the employee</mat-hint>
+        <mat-error *ngIf="employeeFormGroup.controls.last_name.hasError('required')">Last name is required</mat-error>
+    </mat-form-field>
+    <!--<mat-form-field>
+        <mat-select placeholder="Genre" formControlName="genre">
+            <mat-option [value]="genre.key"
+                        *ngFor="let genre of genreService.genreNames | keyvalue">{{genre.value}}</mat-option>
+        </mat-select>
+        <mat-hint align="end">The genre of the movie</mat-hint>
+    </mat-form-field>-->
+    <app-date placeholder="Date of birth" formControlName="dob" hint="The date of birth of the employee"
+              [required]="true"></app-date>
+    <div *ngIf="age !== undefined">Age: {{age}} years</div>
+    <!--<mat-form-field>
+        <textarea matInput placeholder="Plot" formControlName="plot" required></textarea>
+        <mat-hint align="end">The plot of the movie</mat-hint>
+        <mat-error *ngIf="employeeFormGroup.controls.plot.hasError('required')">Plot is required</mat-error>
+        <mat-error *ngIf="employeeFormGroup.controls.plot.hasError('badWord')">Plot contains "bad word"</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="number" placeholder="Duration" formControlName="duration">
+        <mat-hint align="end">The duration of the movie</mat-hint>
+        <mat-error *ngIf="employeeFormGroup.controls.duration.hasError('max')">Duration is too long</mat-error>
+    </mat-form-field>
+    <mat-checkbox formControlName="black_and_white">Black and white</mat-checkbox>-->
+    <mat-form-field>
+        <mat-select placeholder="Department"
+                    formControlName="department">
+            <mat-option [value]="null">Unknown</mat-option>
+            <mat-option [value]="departmentOption.id"
+                        *ngFor="let departmentOption of departmentOptions">{{departmentOption.name}}</mat-option>
+        </mat-select>
+        <mat-hint align="end">The department of the employee</mat-hint>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-select placeholder="Projects"
+                    formControlName="projects" multiple>
+            <mat-option [value]="null">None</mat-option>
+            <mat-option [value]="projectOption.id"
+                        *ngFor="let projectOption of projectOptions">{{projectOption.name}}</mat-option>
+        </mat-select>
+        <mat-hint align="end">The projects of the employee</mat-hint>
+    </mat-form-field>
+    <mat-card-actions align="center">
+        <button mat-raised-button color="primary" [disabled]="!employeeFormGroup.valid" (click)="createEmployee()">
+            <span *ngIf="!employeeFormGroup.controls.id.value">Create</span>
+            <span *ngIf="employeeFormGroup.controls.id.value">Update</span>
+        </button>
+    </mat-card-actions>
+</form>
