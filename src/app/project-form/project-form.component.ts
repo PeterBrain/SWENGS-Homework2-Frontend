@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, AsyncValidatorFn, FormBuilder, ValidationErrors, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, ValidatorFn, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProjectService} from '../service/project.service';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
 
 @Component({
     selector: 'app-project-form',
@@ -22,37 +20,14 @@ export class ProjectFormComponent implements OnInit {
 
     projectFormGroup;
 
-    nameValidator(): AsyncValidatorFn {
-        return (control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
-            return this.projectService.getProjects().pipe(
-                map((project: any[]) => {
-                    const currentId = this.projectFormGroup.controls.id.value;
-                    const currentName = this.projectFormGroup.controls.name.value;
-
-                    const projectWithSameName = project.find((m) => {
-                        return m.id !== currentId && m.name === currentName;
-                    });
-
-                    if (projectWithSameName) {
-                        return {
-                            nameAlreadyExists: true
-                        };
-                    } else {
-                        return null;
-                    }
-                })
-            );
-        };
-    }
-
     ngOnInit() {
         this.projectFormGroup = this.fb.group({
             'id': [null],
-            'name': ['', [Validators.required/*, this.nameValidator()*/]],
+            'name': ['', [Validators.required, this.nameValidator()]],
             'description': [null],
             'start_date': [null, Validators.required],
             'end_date': [null],
-            'progress': [0],
+            'progress': [0, Validators.max(100)],
             'finished': [false],
         });
 
@@ -85,5 +60,13 @@ export class ProjectFormComponent implements OnInit {
         }
 
         return value;
+    }
+
+    nameValidator(): ValidatorFn {
+        return (control: AbstractControl): { [key: string]: any } | null => {
+            const forbidden = ['project', 'test'];
+            const exist = forbidden.some(word => control.value.toLowerCase().includes(word));
+            return exist ? {nameContainsBadWords: {value: control.value}} : null;
+        };
     }
 }

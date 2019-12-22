@@ -8,13 +8,11 @@ import {UserService} from './service/user.service';
 })
 export class AppComponent {
     title = 'frontend';
-
     isLoggedIn = false;
 
     constructor(private userService: UserService) {
     }
 
-    // tslint:disable-next-line:use-lifecycle-interface
     ngOnInit() {
         this.userService.isLoggedIn.subscribe((isLoggedIn) => {
             this.isLoggedIn = isLoggedIn;

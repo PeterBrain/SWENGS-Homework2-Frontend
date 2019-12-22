@@ -28,6 +28,10 @@
         <mat-icon aria-hidden="false" aria-label="sidebar icon">apps</mat-icon>
     </button>
     <mat-drawer #drawer mode="side">
+        <mat-toolbar>
+            <span>Sidemenu</span>
+        </mat-toolbar>
+
         <mat-expansion-panel *ngIf="isLoggedIn">
             <mat-expansion-panel-header>
                 <mat-panel-title>
@@ -40,7 +44,17 @@
             <button mat-button routerLink="project-list">Projects</button>
         </mat-expansion-panel>
 
-        <p>Random usage of different Material components</p>
+        <mat-expansion-panel *ngIf="isLoggedIn">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <span>Create</span>
+                </mat-panel-title>
+                <mat-panel-description></mat-panel-description>
+            </mat-expansion-panel-header>
+            <button mat-button routerLink="department-form">Departments</button>
+            <button mat-button routerLink="employee-form">Employees</button>
+            <button mat-button routerLink="project-form">Projects</button>
+        </mat-expansion-panel>
     </mat-drawer>
     <router-outlet></router-outlet>
 </mat-drawer-container>

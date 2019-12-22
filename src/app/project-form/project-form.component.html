@@ -3,7 +3,7 @@
         <input matInput type="text" placeholder="Name" formControlName="name" required>
         <mat-hint align="end">The name of the project</mat-hint>
         <mat-error *ngIf="projectFormGroup.controls.name.hasError('required')">Name is required</mat-error>
-        <mat-error *ngIf="projectFormGroup.controls.name.hasError('nameAlreadyExists')">Name already exists</mat-error>
+        <mat-error *ngIf="projectFormGroup.controls.name.hasError('nameContainsBadWords')">This name contains word, which are not allowed</mat-error>
     </mat-form-field>
     <mat-form-field>
         <input matInput type="text" placeholder="Description" formControlName="description">
@@ -16,6 +16,7 @@
     <span>Progress</span>
     <mat-slider formControlName="progress" step="5" tickInterval="1" thumbLabel="thumbLabel"
                 [displayWith]="formatLabel"></mat-slider>
+    <mat-error *ngIf="projectFormGroup.controls.progress.hasError('max')">Value exceeds maximum</mat-error>
     <mat-checkbox formControlName="finished">Finished</mat-checkbox>
     <mat-card-actions align="center">
         <button mat-raised-button color="primary" [disabled]="!projectFormGroup.valid" (click)="createProject()">

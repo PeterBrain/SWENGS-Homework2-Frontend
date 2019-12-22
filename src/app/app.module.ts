@@ -3,8 +3,11 @@ import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+import {DateComponent} from './date/date.component';
 import {LoginComponent} from './login/login.component';
 import {LogoutComponent} from './logout/logout.component';
+import {DepartmentFormComponent} from './department-form/department-form.component';
+import {DepartmentListComponent} from './department-list/department-list.component';
 import {EmployeeListComponent} from './employee-list/employee-list.component';
 import {EmployeeFormComponent} from './employee-form/employee-form.component';
 import {ProjectFormComponent} from './project-form/project-form.component';
@@ -31,9 +34,6 @@ import {
     MatTableModule,
     MatToolbarModule
 } from '@angular/material';
-import { DepartmentFormComponent } from './department-form/department-form.component';
-import { DepartmentListComponent } from './department-list/department-list.component';
-import { DateComponent } from './date/date.component';
 
 export function tokenGetter() {
     return localStorage.getItem('access_token');

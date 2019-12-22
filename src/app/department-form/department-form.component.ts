@@ -23,7 +23,7 @@ export class DepartmentFormComponent implements OnInit {
     ngOnInit() {
         this.departmentFormGroup = this.fb.group({
             'id': [null],
-            'name': ['', [Validators.required, /*this.titleValidator()*/]],
+            'name': ['', [Validators.required]],
             'description': [null],
         });
 

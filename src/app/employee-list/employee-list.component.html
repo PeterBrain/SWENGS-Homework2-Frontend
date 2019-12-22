@@ -16,6 +16,11 @@
             <td mat-cell *matCellDef="let employee">{{employee.dob}}</td>
         </ng-container>
 
+        <ng-container matColumnDef="department">
+            <th mat-header-cell *matHeaderCellDef>Department</th>
+            <td mat-cell *matCellDef="let employee">{{employee.department}}</td>
+        </ng-container>
+
         <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef>Actions</th>
             <td mat-cell *matCellDef="let employee">

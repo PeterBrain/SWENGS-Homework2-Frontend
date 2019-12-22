@@ -1,12 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, AsyncValidatorFn, FormBuilder, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 import {EmployeeService} from '../service/employee.service';
 import {DepartmentService} from '../service/department.service';
 import {ProjectService} from '../service/project.service';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
 
 @Component({
     selector: 'app-employee-form',
@@ -29,45 +27,12 @@ export class EmployeeFormComponent implements OnInit {
     departmentOptions;
     projectOptions;
 
-    /*badWordValidator(): ValidatorFn {
-        return (control: AbstractControl): { [key: string]: any } | null => {
-            const forbidden = /bad word/.test(control.value);
-            return forbidden ? {badWord: {value: control.value}} : null;
-        };
-    }
-
-    titleValidator(): AsyncValidatorFn {
-        return (control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
-            return this.employeeService.getEmployees().pipe(
-                map((employees: any[]) => {
-                    const currentId = this.employeeFormGroup.controls.id.value;
-                    const currentFirstName = this.employeeFormGroup.controls.first_name.value;
-
-                    const employeeWithSameTitle = employees.find((m) => {
-                        return m.id !== currentId && m.first_name === currentFirstName;
-                    });
-
-                    if (employeeWithSameTitle) {
-                        return {
-                            nameAlreadyExists: true
-                        };
-                    } else {
-                        return null;
-                    }
-                })
-            );
-        };
-    }*/
-
     ngOnInit() {
         this.employeeFormGroup = this.fb.group({
             'id': [null],
-            'first_name': ['', [Validators.required, /*this.titleValidator()*/]],
+            'first_name': ['', Validators.required],
             'last_name': [null],
             'dob': [null, Validators.required],
-            /*'plot': ['', [Validators.required, this.badWordValidator()]],
-            'duration': [90, Validators.max(300)],
-            'black_and_white': [true],*/
             'department': [null],
             'projects': [[]],
         });

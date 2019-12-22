@@ -11,8 +11,8 @@ import {MatPaginator, MatTableDataSource} from '@angular/material';
 })
 export class EmployeeListComponent implements OnInit {
 
-    displayedColumns = ['first_name', 'last_name', 'dob', 'id'];
-    employees: MatTableDataSource<any>; // any[];
+    displayedColumns = ['first_name', 'last_name', 'dob', 'department', 'id'];
+    employees: MatTableDataSource<any>;
 
     @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -20,11 +20,8 @@ export class EmployeeListComponent implements OnInit {
     }
 
     ngOnInit() {
-        /*this.http.get('/api/movie/list').subscribe((response: any[]) => {
-          this.movies = response;
-        });*/
         this.employeeService.getEmployees().subscribe((response: any[]) => {
-            this.employees = new MatTableDataSource<any>(response); // = response;
+            this.employees = new MatTableDataSource<any>(response);
             this.employees.paginator = this.paginator;
         });
     }

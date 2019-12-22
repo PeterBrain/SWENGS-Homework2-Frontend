@@ -28,7 +28,7 @@ export class UserService {
                 localStorage.setItem('access_token', res.token);
                 this.router.navigate(['employee-list']);
             }, () => {
-                alert('wrong username or password');
+                alert('Wrong username or password');
             });
     }
 

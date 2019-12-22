@@ -12,7 +12,7 @@ import {MatPaginator, MatTableDataSource} from '@angular/material';
 export class ProjectListComponent implements OnInit {
 
     displayedColumns = ['name', 'description', 'id'];
-    projects: MatTableDataSource<any>; // any[];
+    projects: MatTableDataSource<any>;
 
     @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -21,7 +21,7 @@ export class ProjectListComponent implements OnInit {
 
     ngOnInit() {
         this.projectService.getProjects().subscribe((response: any[]) => {
-            this.projects = new MatTableDataSource<any>(response); // = response;
+            this.projects = new MatTableDataSource<any>(response);
             this.projects.paginator = this.paginator;
         });
     }
