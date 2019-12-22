@@ -13,6 +13,10 @@ export class EmployeeService {
         return this.http.get('/api/employee/list');
     }
 
+    getEmployeeChartData() {
+        return this.http.get('/api/employee/chart');
+    }
+
     createEmployee(employee) {
         return this.http.post('/api/employee/create', employee);
     }

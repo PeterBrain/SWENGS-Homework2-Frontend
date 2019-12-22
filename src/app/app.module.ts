@@ -16,6 +16,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {JwtModule} from '@auth0/angular-jwt';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {
     MatButtonModule,
     MatCardModule,
@@ -74,6 +75,7 @@ export function tokenGetter() {
         MatSidenavModule,
         MatExpansionModule,
         MatIconModule,
+        NgxChartsModule,
         JwtModule.forRoot({
             config: {
                 tokenGetter: tokenGetter,

@@ -35,3 +35,14 @@
     </table>
     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>
+
+<mat-toolbar>Department size tree map</mat-toolbar>
+<ngx-charts-tree-map
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="chartData"
+        [animations]="animations"
+        [gradient]="gradient"
+        [labelFormatting]="labelFormatting"
+        (select)="onSelect($event)">
+</ngx-charts-tree-map>
